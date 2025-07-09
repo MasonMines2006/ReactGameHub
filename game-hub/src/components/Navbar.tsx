@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { HStack, Image, Text } from "@chakra-ui/react";
 import logo from "../assets/GameHub Logo.webp";
+import ThemeButton from "./ThemeButton";
 
 interface Navbar {
   searchContent: string;
@@ -20,6 +21,7 @@ const Navbar = () => {
       <HStack>
         <Image src={logo} boxSize="60px"></Image>
         <Text> NavBar</Text>
+        <ThemeButton />
       </HStack>
       {/*
       <nav className="navbar bg-body-tertiary">

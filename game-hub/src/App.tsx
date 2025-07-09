@@ -1,11 +1,14 @@
 import { Grid, GridItem, Show, useBreakpointValue } from "@chakra-ui/react";
 import Navbar from "./components/Navbar";
+import { Theme } from "@chakra-ui/react";
+import { useState } from "react";
 
 function App() {
   const showAside = useBreakpointValue({
     base: false,
     lg: true,
   });
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
   return (
     <Grid
       templateAreas={{
