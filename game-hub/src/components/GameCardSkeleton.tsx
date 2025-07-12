@@ -1,4 +1,3 @@
-import React from "react";
 import { Card, Skeleton, CardBody, SkeletonText } from "@chakra-ui/react";
 import GameCardContainer from "./GameCardContainer";
 

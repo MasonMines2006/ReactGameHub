@@ -1,9 +1,5 @@
-import React from "react";
 import { Badge } from "@chakra-ui/react";
-
-interface Props {
-  score: number;
-}
+import type { Props } from "./ui/color-mode";
 
 const CriticScore = ({ score }: Props) => {
   let color = score > 75 ? "green" : score > 60 ? "yellow" : "red";

@@ -1,5 +1,3 @@
-import React from "react";
-
 const Aside = () => {
   const genres: string[] = ["Action", "Adventure", "Indie", "RPG", "Strategy"];
 
