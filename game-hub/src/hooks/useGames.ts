@@ -12,11 +12,8 @@ interface Game {
   id: number;
   name: string;
   background_image: string;
-<<<<<<< HEAD
   parent_platforms: {platform: Platform}[];
   metacritic: number;
-=======
->>>>>>> refs/remotes/origin/main
 }
 
 interface FetchGameResponse {
@@ -27,30 +24,27 @@ interface FetchGameResponse {
 const useGames = () => {
   const [games, setGames] = useState<Game[]>([]);
   const [error, setError] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
-
+    setLoading(true);
     apiClient
       .get<FetchGameResponse>("/games", { signal: controller.signal })
       .then((response) => {
         setGames(response.data.results);
+        setLoading(false);
       })
       .catch((error) => {
         if (error instanceof CanceledError) return;
         setError(error.message);
+        setLoading(false);
       });
-
-    // ✅ Proper cleanup function
     return () => controller.abort();
   }, []);
 
-  return { games, error };
+  return { games, error, isLoading};
 };
 
 export default useGames;
-<<<<<<< HEAD
 export type { Game, Platform };
-=======
-export type { Game };
->>>>>>> refs/remotes/origin/main

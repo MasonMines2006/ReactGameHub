@@ -21,8 +21,8 @@ const Navbar = () => {
       <HStack
         justifyContent="space-between"
         alignItems="center"
-        paddingLeft="10px"
-        paddingRight={"10px"}
+        paddingX={10}
+        padding={2}
       >
         <Image src={logo} boxSize="70px"></Image>
         <ThemeButton />
