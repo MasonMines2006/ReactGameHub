@@ -18,9 +18,13 @@ const Navbar = () => {
 
   return (
     <div>
-      <HStack>
-        <Image src={logo} boxSize="60px"></Image>
-        <Text> NavBar</Text>
+      <HStack
+        justifyContent="space-between"
+        alignItems="center"
+        paddingLeft="10px"
+        paddingRight={"10px"}
+      >
+        <Image src={logo} boxSize="70px"></Image>
         <ThemeButton />
       </HStack>
       {/*

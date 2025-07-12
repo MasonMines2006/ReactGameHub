@@ -1,7 +1,8 @@
 import React from "react";
 import { type Game } from "@/hooks/useGames";
-import { Card, Image, Text, Button } from "@chakra-ui/react";
+import { Card, Image, Text, Button, HStack } from "@chakra-ui/react";
 import PlatformIconList from "./PlatformIconList";
+import CriticScore from "./CriticScore";
 
 interface Props {
   game: Game;
@@ -20,9 +21,12 @@ const GameCard = ({ game }: Props) => {
 
         <Card.Body gap="2" borderRadius={20}>
           <Card.Title>{game.name}</Card.Title>
-          <PlatformIconList
-            platforms={game.parent_platforms.map((p) => p.platform)}
-          ></PlatformIconList>
+          <HStack justifyContent="space-between" alignItems="center">
+            <PlatformIconList
+              platforms={game.parent_platforms.map((p) => p.platform)}
+            ></PlatformIconList>
+            <CriticScore score={game.metacritic}></CriticScore>
+          </HStack>
           <Card.Description>
             This sofa is perfect for modern tropical spaces, baroque inspired
             spaces.
