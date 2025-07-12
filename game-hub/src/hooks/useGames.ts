@@ -12,8 +12,11 @@ interface Game {
   id: number;
   name: string;
   background_image: string;
+<<<<<<< HEAD
   parent_platforms: {platform: Platform}[];
   metacritic: number;
+=======
+>>>>>>> refs/remotes/origin/main
 }
 
 interface FetchGameResponse {
@@ -46,4 +49,8 @@ const useGames = () => {
 };
 
 export default useGames;
+<<<<<<< HEAD
 export type { Game, Platform };
+=======
+export type { Game };
+>>>>>>> refs/remotes/origin/main
