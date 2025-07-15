@@ -7,6 +7,7 @@ import {
   Text,
   Spinner,
   Button,
+  Box,
 } from "@chakra-ui/react";
 
 interface Props {
@@ -20,28 +21,32 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
   if (error) return <Text>And error occured.</Text>;
   return (
     <>
-      <List.Root>
-        {data.map((genre) => (
-          <ListItem key={genre.id}>
-            <HStack paddingY="5px" fontSize="lg">
-              <Image
-                boxSize="40px"
-                borderRadius={8}
-                src={genre.image_background}
-              />
-              <Button
-                fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
-                onClick={() => onSelectGenre(genre)}
-                fontSize="lg"
-                variant={"ghost"}
-              >
-                {" "}
-                {genre.name}{" "}
-              </Button>
-            </HStack>
-          </ListItem>
-        ))}
-      </List.Root>
+      <Box position="sticky" top={0} zIndex={1} paddingY={5} overflow={"auto"}>
+        <List.Root>
+          {data.map((genre) => (
+            <ListItem key={genre.id}>
+              <HStack paddingY="5px" fontSize="lg">
+                <Image
+                  boxSize="40px"
+                  borderRadius={8}
+                  src={genre.image_background}
+                />
+                <Button
+                  fontWeight={
+                    genre.id === selectedGenre?.id ? "bold" : "normal"
+                  }
+                  onClick={() => onSelectGenre(genre)}
+                  fontSize="lg"
+                  variant={"ghost"}
+                >
+                  {" "}
+                  {genre.name}{" "}
+                </Button>
+              </HStack>
+            </ListItem>
+          ))}
+        </List.Root>
+      </Box>
     </>
   );
 };

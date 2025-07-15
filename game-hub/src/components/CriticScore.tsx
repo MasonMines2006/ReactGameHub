@@ -10,7 +10,7 @@ const CriticScore = ({ score }: Props) => {
       borderRadius={4}
       colorPalette={color}
     >
-      {score}
+      {score === null ? "--" : score}
     </Badge>
   );
 };

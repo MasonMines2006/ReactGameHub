@@ -1,3 +1,4 @@
+import type { GameQuery } from "@/App";
 import useData from "./useData";
 import type { Genre } from "./usegenres";
 import type { Platform } from "./usePlatforms";
@@ -10,18 +11,18 @@ interface Game {
   metacritic: number;
 }
 
-const useGames = (selectedGenre: Genre | null, selectedPlatforms: Platform[] = []) => {
-  const platformIds = selectedPlatforms.map((p) => p.id).join(",");
+const useGames = (gameQuery: GameQuery) => {
+  const platformIds = gameQuery.defaultSelectedPlatforms?.map((p) => p.id).join(",");
 
   return useData<Game>(
     "/games",
     {
       params: {
-        genres: selectedGenre?.id,
+        genres: gameQuery.genre?.id,
         parent_platforms: platformIds, // omit if empty
       },
     },
-    [selectedGenre?.id, platformIds]
+    [gameQuery]
   );
 };
 

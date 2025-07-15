@@ -16,30 +16,32 @@ import type { Platform } from "@/hooks/usePlatforms";
 interface Props {
   platforms: Platform[];
 }
+
 const PlatformIconList = ({ platforms }: Props) => {
   const iconMap: { [key: string]: IconType } = {
-    //name: PlayStation
-    //slug: playstation
     pc: FaWindows,
     playstation: FaPlaystation,
     xbox: FaXbox,
-    nintendo: SiNintendo,
-    ios: MdPhoneIphone,
-    android: FaAndroid,
     mac: FaApple,
     linux: FaLinux,
+    android: FaAndroid,
+    ios: MdPhoneIphone,
+    nintendo: SiNintendo,
+    atari: BsGlobe, // Assuming the 'Globe' icon for Atari, customize if you prefer another
+    commodore: BsGlobe, // Same for Commodore / Amiga
+    sega: BsGlobe, // Similarly use a placeholder for Sega
+    "3do": BsGlobe, // Placeholder for 3DO
+    neogeo: BsGlobe, // Placeholder for Neo Geo
     web: BsGlobe,
   };
 
   return (
     <HStack>
-      {platforms.map((platform) => (
-        <Icon
-          key={platform.slug}
-          as={iconMap[platform.slug]}
-          color={"gray.500"}
-        />
-      ))}
+      {platforms.map(({ slug, id }) => {
+        const IconComponent = iconMap[slug];
+        if (!IconComponent) return null;
+        return <Icon key={id} as={IconComponent} color="gray.500" />;
+      })}
     </HStack>
   );
 };
