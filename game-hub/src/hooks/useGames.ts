@@ -12,9 +12,13 @@ interface Game {
 }
 
 const useGames = (gameQuery: GameQuery) => {
-  const platformIds = gameQuery.defaultSelectedPlatforms?.map((p) => p.id).join(",");
+    let platformIds = gameQuery.platforms?.map((p) => p.id).join(",");
+    if ( platformIds === "") {
+        platformIds = "1"
+    } 
+    console.log("Platform IDs:", platformIds);
 
-  return useData<Game>(
+    return useData<Game>(
     "/games",
     {
       params: {

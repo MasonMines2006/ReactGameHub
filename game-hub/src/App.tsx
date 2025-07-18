@@ -15,13 +15,9 @@ export interface GameQuery {
 
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
-  const defaultPlatform: Platform[] = [
-    {
-      id: 4,
-      name: "PC",
-      slug: "pc",
-    },
-  ];
+  const handleGameQuery = (query: GameQuery) => {
+    setGameQuery(query);
+  };
   const showAside = useBreakpointValue({
     base: false,
     lg: true,
@@ -45,17 +41,17 @@ function App() {
           <GenreList
             selectedGenre={gameQuery.genre}
             onSelectGenre={(genre) => {
-              setGameQuery({ ...gameQuery, genre });
+              handleGameQuery({ ...gameQuery, genre });
             }}
           />
         </GridItem>
       </Show>
       <GridItem area="main" paddingX={5}>
         <PlatformSelector
-          onSelectPlatform={(platforms: Platform[]) =>
-            setGameQuery({ ...gameQuery, platforms })
-          }
-          defaultSelectedPlatforms={defaultPlatform}
+          gameQuery={gameQuery}
+          onSelectPlatform={(platforms) => {
+            handleGameQuery({ ...gameQuery, platforms });
+          }}
         />
         <GameGrid gameQuery={gameQuery} />
       </GridItem>

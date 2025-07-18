@@ -30,6 +30,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
                   boxSize="40px"
                   borderRadius={8}
                   src={genre.image_background}
+                  loading="lazy"
                 />
                 <Button
                   fontWeight={

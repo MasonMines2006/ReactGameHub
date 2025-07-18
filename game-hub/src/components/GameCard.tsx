@@ -20,6 +20,7 @@ const GameCard = ({ game }: Props) => {
           <Image
             src={game.background_image || "https://via.placeholder.com/300x200"}
             alt={game.name}
+            loading="lazy"
           />
 
           <Card.Body gap="2">

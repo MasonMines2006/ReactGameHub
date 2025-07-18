@@ -1,60 +1,42 @@
+import type { GameQuery } from "@/App";
 import useAllPlatforms, { type Platform } from "@/hooks/usePlatforms";
 import {
   Button,
   Menu,
   Portal,
-  useCheckboxGroup,
   HStack,
   Stack,
+  useCheckboxGroup,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { HiCog } from "react-icons/hi";
 
 interface Props {
-  onSelectPlatform: (checkedPlatforms: Platform[]) => void;
-  defaultSelectedPlatforms?: Platform[];
+  gameQuery: GameQuery;
+  onSelectPlatform: (platforms: Platform[]) => void;
 }
 
-const PlatformSelector = ({
-  onSelectPlatform,
-  defaultSelectedPlatforms = [],
-}: Props) => {
+const PlatformSelector = ({ gameQuery, onSelectPlatform }: Props) => {
   const { data = [], error } = useAllPlatforms();
 
-  const allSlugs = data.map((platform) => platform.slug);
-  const defaultSlugs = defaultSelectedPlatforms.map((p) => p.slug);
+  const allSlugs = data.map((p) => p.slug);
+  const defaultSlugs =
+    gameQuery.defaultSelectedPlatforms?.map((p) => p.slug) ?? allSlugs;
 
-  const group = useCheckboxGroup({
-    defaultValue: defaultSlugs.length > 0 ? defaultSlugs : allSlugs,
+  const { value, isChecked, toggleValue, setValue } = useCheckboxGroup({
+    defaultValue: defaultSlugs,
   });
 
   useEffect(() => {
     if (!data.length) return;
-
     const selectedPlatforms = data.filter((platform) =>
-      group.value.includes(platform.slug)
+      value.includes(platform.slug)
     );
-
     onSelectPlatform(selectedPlatforms);
-  }, [group.value.join(","), data.length]); // stable deps
+  }, [value.join(","), data.length]);
 
-  const togglePlatform = (slug: string) => {
-    group.toggleValue(slug);
-  };
-
-  const handleSelectAll = () => {
-    console.log("selectedAll");
-    allSlugs.forEach((slug) => {
-      if (!group.isChecked(slug)) group.toggleValue(slug);
-    });
-  };
-
-  const handleClearAll = () => {
-    console.log("clearedAll");
-    allSlugs.forEach((slug) => {
-      if (group.isChecked(slug)) group.toggleValue(slug);
-    });
-  };
+  const handleSelectAll = () => setValue(allSlugs);
+  const handleClearAll = () => setValue([]);
 
   if (error) return null;
 
@@ -75,8 +57,8 @@ const PlatformSelector = ({
                 <Menu.CheckboxItem
                   key={id}
                   value={slug}
-                  checked={group.isChecked(slug)}
-                  onCheckedChange={() => togglePlatform(slug)}
+                  checked={isChecked(slug)}
+                  onCheckedChange={() => toggleValue(slug)}
                 >
                   {name}
                   <Menu.ItemIndicator />
