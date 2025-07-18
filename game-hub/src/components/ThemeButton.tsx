@@ -21,7 +21,7 @@ const ThemeButton = () => {
             <Icon as={FaSun} color="yellow.400" />
           </Switch.Indicator>
         </Switch.Control>
-        <Switch.Label>{text}</Switch.Label>
+        <Switch.Label whiteSpace="nowrap">{text}</Switch.Label>
       </Switch.Root>
     </Stack>
   );

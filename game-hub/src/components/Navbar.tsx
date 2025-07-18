@@ -2,13 +2,13 @@ import { useState } from "react";
 import { Box, HStack, Image, Text } from "@chakra-ui/react";
 import logo from "../assets/GameHub Logo.webp";
 import ThemeButton from "./ThemeButton";
+import SearchInput from "./SearchInput";
 
-interface Navbar {
-  searchContent: string;
-  check: Boolean;
+interface Props {
+  onSearch: (searchText: string) => void;
 }
 
-const Navbar = () => {
+const Navbar = ({ onSearch }: Props) => {
   const handleSubmit = () => {
     console.log("submitted!");
   };
@@ -25,16 +25,7 @@ const Navbar = () => {
         padding={2}
       >
         <Image src={logo} boxSize="70px"></Image>
-        <Text
-          fontWeight="extrabold"
-          fontSize={{ base: "lg", md: "2xl" }}
-          letterSpacing="wide"
-          as="h1"
-          whiteSpace="nowrap"
-          userSelect="none"
-        >
-          Mosh x Rawg Game Hub
-        </Text>
+        <SearchInput onSearch={onSearch} />
         <ThemeButton />
       </HStack>
     </Box>
