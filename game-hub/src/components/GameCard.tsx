@@ -18,7 +18,10 @@ const GameCard = ({ game }: Props) => {
       <GameCardContainer>
         <Card.Root>
           <Image
-            src={game.background_image || "https://via.placeholder.com/300x200"}
+            src={
+              game.background_image ||
+              "game-hub/src/assets/no-image-placeholder-6f3882e0.webp"
+            }
             alt={game.name}
             loading="lazy"
           />

@@ -24,6 +24,7 @@ const useGames = (gameQuery: GameQuery) => {
       params: {
         genres: gameQuery.genre?.id,
         parent_platforms: platformIds, // omit if empty
+        ordering: gameQuery.sortOrder,
       },
     },
     [gameQuery]
