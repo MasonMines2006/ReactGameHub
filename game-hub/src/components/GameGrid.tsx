@@ -11,7 +11,6 @@ interface Props {
 }
 
 const GameGrid = ({ gameQuery }: Props) => {
-  console.log("Game Grid Game query:", gameQuery);
   const { data: games, error, isLoading } = useGames(gameQuery);
   // console.log("Games fetched:", games);
   if (error) return <p>{error}</p>;

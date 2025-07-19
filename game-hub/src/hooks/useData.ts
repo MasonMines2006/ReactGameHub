@@ -19,16 +19,21 @@ const useData = <T>(endpoint:string, requestConfig?: AxiosRequestConfig, deps?: 
     const fullConfig = { signal: controller.signal, ...requestConfig };
     console.log("Fetching from:", endpoint, fullConfig);
     apiClient
-        .get<FetchResponse<T>>(endpoint, { signal: controller.signal, ...requestConfig })
+        .get(endpoint, { signal: controller.signal, ...requestConfig })
         .then((response) => {
-        setData(response.data.results);
-        setLoading(false);
+            const responseData = response.data;
+
+            // If it's a FetchResponse, use results
+            if (Array.isArray(responseData.results)) {
+            setData(responseData.results);
+            } else {
+            // Otherwise, wrap the single object in an array
+            setData([responseData]);
+            }
+
+            setLoading(false);
         })
-        .catch((error) => {
-        if (error instanceof CanceledError) return;
-        setError(error.message);
-        setLoading(false);
-        });
+
     return () => controller.abort();
     }, deps ? [...deps] : []);
 
